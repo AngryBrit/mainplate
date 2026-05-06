@@ -15,6 +15,7 @@ Built with Flask + SQLite, runs entirely in Docker with no external dependencies
 ![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-DaisyUI-38bdf8?logo=tailwindcss)
+![Release](https://img.shields.io/badge/release-1.3.0-2ea44f)
 
 ---
 
@@ -43,6 +44,7 @@ Built with Flask + SQLite, runs entirely in Docker with no external dependencies
 | **Collection** | Personal watches with wishlist, service/intervention diary, sold tracking, and cost breakdown |
 | **Inventory** | Parts, oils, gaskets — with quantity and value per item |
 | **Equipment** | Tools and instruments with total value |
+| **Lift Angles** | Manufacturer/model lift-angle lookup with normalization and direct management |
 | **Settings** | Language, currency, date format, hourly rate, categories, and full ZIP backup/restore |
 
 ---
@@ -91,6 +93,14 @@ Each cell also carries **per-field diagnostic warnings** that highlight anomalie
 | Beat error | 0.5–1.0 ms | warning — adjust the lever |
 | 3U / 9U | diff > 15 s/d | warning — possible balance wheel poise issue |
 | 6U / 12U | diff > 15 s/d | warning — check lever or hairspring |
+
+---
+
+### Lift Angle Database & Timing Calculator
+
+Mainplate includes a dedicated **Lift Angles** screen to manage calibration data used by timegrapher calculations. Entries can be added, edited, and searched by manufacturer/model, and are applied directly when working with flips.
+
+Manufacturer names are **normalized** during lookup (for example, common punctuation and naming variants), improving match reliability and reducing duplicate near-identical entries.
 
 ---
 
@@ -153,7 +163,7 @@ UI language is switchable from Settings. Translations live in `lang/en.json` and
 **Requirements:** Docker and Docker Compose.
 
 ```bash
-git clone https://github.com/flaggz/mainplate.git
+git clone https://github.com/AngryBrit/mainplate.git
 cd mainplate/app
 docker compose up --build
 ```
@@ -232,6 +242,8 @@ In-app settings (saved to the database via the Settings page):
 ## Project Structure
 
 ```
+package.json                    # frontend tooling metadata and version
+package-lock.json
 app/
 ├── app.py                        # Flask app, all routes and DB logic
 ├── requirements.txt
@@ -255,6 +267,7 @@ app/
 │   ├── collection_dashboard.html
 │   ├── inventory.html
 │   ├── equipment.html
+│   ├── lift_angles.html
 │   ├── settings.html
 │   └── macros.html
 └── static/
