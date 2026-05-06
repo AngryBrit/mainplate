@@ -5,7 +5,8 @@ on:
     branches:
       - main
     tags:
-      - "v*"
+      - "v*.*.*"
+      - "*.*.*"
 
 jobs:
   push_to_registry:
