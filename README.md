@@ -244,6 +244,11 @@ In-app settings (saved to the database via the Settings page):
 ```
 package.json                    # frontend tooling metadata and version
 package-lock.json
+VERSION                         # canonical project release version
+CHANGELOG.md                    # release history
+RELEASE_NOTES_TEMPLATE.md       # release notes skeleton
+AUTHORS
+LICENCE
 app/
 ├── app.py                        # Flask app, all routes and DB logic
 ├── requirements.txt
@@ -297,6 +302,15 @@ app/
 1. Copy `lang/en.json` to `lang/xx.json` (e.g. `de.json`)
 2. Translate the values (leave the keys as-is)
 3. Restart the container — the new language will appear in Settings
+
+---
+
+## Release Workflow
+
+1. Update `CHANGELOG.md` with a new version section.
+2. Align version values in `VERSION`, `package.json`, and `package-lock.json`.
+3. Commit and tag the release (e.g. `1.4.0`), then push branch + tag.
+4. Publish a GitHub release using notes from `RELEASE_NOTES_TEMPLATE.md`.
 
 ---
 
